@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <th:block th:insert="base :: header"></th:block>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="base :: navlinks"></div>
+
+<div class="container bg-light pl-5 pr-5">
+
+    <div th:each="user : ${users}">
+        <h2>[[${user.firstname}]] [[${user.lastname}]]</h2>
+        <div align="center">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row text-center">
+                        <!--<div class="space"></div>-->
+                            <div class="card-header">
+                                <div th:date="${user.firstname}"></div>
+                            </div>
+                            <div class="card-header">
+                                <div th:date="${user.email}"></div>
+                            </div>
+                            <div class="card-body">
+                                <img class="card-img-top user-img" th:src="${user.gravatar}" alt="gravatar image"/>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

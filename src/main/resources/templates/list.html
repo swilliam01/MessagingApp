@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:background-image="http://java.sun.com/JSP/Page">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -32,7 +32,9 @@
 
     <tr th:each="message : ${messages}">
         <td th:text="${message.content}"></td>
-        <td th:text="${message.sentBy}"></td>
+        <td>
+        <img th:src="${message.user.gravatar}" class="avatar" />
+        <a th:href="@{/userpage/{id}(id=${message.id})}"><strong>[[${message.user.username}]]</strong></a>
         <td th:text="${message.date}"></td>
         <td>
             <div sec:authorize="hasAuthority('ADMIN')">

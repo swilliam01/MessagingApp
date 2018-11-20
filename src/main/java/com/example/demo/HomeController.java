@@ -73,6 +73,8 @@ public class HomeController {
 
   @PostMapping("/process")
   public String processList(@Valid @ModelAttribute("message") Message message, BindingResult result) {
+    User user = userService.getUser();
+    user.setGravatar(gravatar(user.getId()));
     if (result.hasErrors()) {
       return "listform";
     }
@@ -97,6 +99,20 @@ public class HomeController {
       messageRepository.deleteById(id);
       return "redirect:/";
     }
+  public String gravatar(@PathVariable("id") long id){
+    User user = userService.getUser();
+    String hash = userService.md5Hex(user.getEmail());
+    String gravurl = "https://s.gravatar.com/avatar/";
+    String gravatar = gravurl + hash + "?s=21";
+    user.setGravatar(gravatar);
+    gravatar = user.getGravatar();
+    return gravatar;
+  }
 
+  @RequestMapping("/userpage/{id}")
+  public String userPage(@PathVariable("id") long id, Model model){
+    model.addAttribute("users", userRepository.findById(id).get());
+    return "userpage";
+  }
 
   }

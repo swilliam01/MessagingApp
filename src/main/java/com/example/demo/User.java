@@ -31,6 +31,7 @@ public class User {
     @Column(name = "username")
     private String username;
 
+    private String gravatar;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(joinColumns = @JoinColumn(name = "user_id"),
@@ -69,6 +70,14 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getGravatar() {
+        return gravatar;
+    }
+
+    public void setGravatar(String gravatar) {
+        this.gravatar = gravatar;
     }
 
     public void setPassword(String password) {
